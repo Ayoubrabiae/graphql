@@ -5,4 +5,7 @@ import { router } from "./views/routes.js";
 addPushStateEvent();
 
 router();
-window.addEventListener("historyPushState", console.log("Hello"));
+
+window.addEventListener("historyPushState", () => {
+  router();
+});

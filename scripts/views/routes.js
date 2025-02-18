@@ -8,6 +8,8 @@ import { homeView } from "./home.js";
 import { loginView } from "./login.js";
 
 export const router = () => {
+  console.log("Hi");
+
   const jwt = localStorage.getItem(TOKEN_NAME);
   const appElement = document.querySelector(APP_ELEMENT_CLASS);
   appElement.innerHTML = "";
