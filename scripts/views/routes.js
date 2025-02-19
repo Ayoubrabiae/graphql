@@ -7,14 +7,14 @@ import { APP_ELEMENT_CLASS, TOKEN_NAME } from "../constants/constans.js";
 import { homeView } from "./home.js";
 import { loginView } from "./login.js";
 
-export const router = () => {
+export const router = async () => {
   console.log("Hi");
 
   const jwt = localStorage.getItem(TOKEN_NAME);
   const appElement = document.querySelector(APP_ELEMENT_CLASS);
   appElement.innerHTML = "";
   if (jwt) {
-    appElement.append(homeView());
+    appElement.append(await homeView());
   } else {
     appElement.append(loginView());
   }

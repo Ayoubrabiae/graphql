@@ -82,11 +82,31 @@ form .error {
 /* End Login Styling */
 
 /* Start Home Styling */
+section.home .logout-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  transition-duration: 0.3s;
+  justify-content: center;
+  padding: 5px 20px;
+  background: #eee;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+section.home .logout-btn:hover {
+  opacity: 1;
+}
+
 section.home::before {
   content: "";
   position: absolute;
   width: 100%;
-  height: 125px;
+  height: 135px;
   background: linear-gradient(180deg, #007145, #000000);
   z-index: -1;
 }
@@ -95,7 +115,7 @@ section.home::before {
   display: flex;
   align-items: center;
   flex-direction: column;
-  text-align: center;
+  /* text-align: center; */
   gap: 20px;
   padding: 40px 0;
   font-size: 17px;
@@ -116,11 +136,30 @@ section.home::before {
 .basic-info .row .col .full-name {
   font-weight: bold;
 }
-.basic-info .row .col .username {
+.basic-info .row .col .label {
   display: block;
   text-align: left;
   font-size: 13px;
   color: green;
+}
+
+/* Charts Styling */
+.charts {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+.charts .chart {
+  border: 1px solid black;
+  /* max-width: 100%; */
+}
+
+.charts .chart svg {
+  max-width: 100%;
 }
 
 /* End Home Styling */

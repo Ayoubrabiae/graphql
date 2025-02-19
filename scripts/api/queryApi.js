@@ -1,4 +1,4 @@
-import { GRAPHQL_URL } from "../constants/constans";
+import { GRAPHQL_URL } from "../constants/constans.js";
 
 export const fetchData = async (token, query) => {
   try {
@@ -15,15 +15,8 @@ export const fetchData = async (token, query) => {
       return { success: false, err: data.error };
     }
 
-    return { success: true, token };
+    return { success: true, data };
   } catch (err) {
     return { success: false, err };
   }
 };
-
-// Skills
-// Basic
-// Audit Ratio Up Down
-// Xp on time
-// Xp on projects
-// Level
