@@ -148,14 +148,19 @@ section.home::before {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  gap: 40px;
+  gap: 100px;
   flex-wrap: wrap;
   padding: 50px 0;
 }
 
 .charts .chart {
-  border: 1px solid black;
-  /* max-width: 100%; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 30px;
+}
+
+.charts .chart .title {
+  text-align: center;
 }
 
 .charts .chart svg {

@@ -1,11 +1,23 @@
 import { fetchData } from "../api/queryApi.js";
+import { barGraph } from "../components/barGraph.js";
 import { basicInfo } from "../components/basicInfo.js";
+import { radarGraph } from "../components/radarGraph.js";
 import { TOKEN_NAME } from "../constants/constans.js";
 import { query } from "../constants/queries.js";
+import { extractProjects, makeSkillsUnique } from "../helpers/helpers.js";
 
 export const homeView = async () => {
   const { data } = await fetchData(localStorage.getItem(TOKEN_NAME), query);
-  console.log(data);
+  if (data.errors) {
+    localStorage.removeItem("JWT");
+    history.pushState(null, null, "/");
+    return "";
+  }
+
+  // make skills unique and take top 5 skills
+  const skills = makeSkillsUnique(data.data.skills);
+  const projects = extractProjects(data.data.xpPeerProjects);
+
   const basicInfoObj = {
     login: data.data.user[0].login,
     firstName: data.data.user[0].attrs.firstName,
@@ -27,10 +39,12 @@ export const homeView = async () => {
 
             <div class="charts">
               <div class="skills chart">
+                <h2 class="title">Skills</h2>
                 <svg id="skillsChart" width="400" height="400"></svg>
               </div>
               <div class="lastProjects chart">
-                <svg id="projectsChart"  width="500" height="350"></svg>
+              <h2 class="title">Last Projects</h2>
+                <svg id="projectsChart"  width="500" height="450"></svg>
               </div>
             </div>
 
@@ -39,6 +53,14 @@ export const homeView = async () => {
     `;
 
   const element = document.createRange().createContextualFragment(template);
+
+  radarGraph(
+    Object.keys(skills).map((e) => e.replace("skill_", "").toUpperCase()),
+    Object.values(skills),
+    element.getElementById("skillsChart")
+  );
+
+  barGraph(projects, element.getElementById("projectsChart"));
 
   return element;
 };

@@ -1,71 +1,53 @@
 export const barGraph = (data, svg) => {
-//   const data = [
-//     { project: "A", xp: 30 },
-//     { project: "B", xp: 80 },
-//     { project: "C", xp: 45 },
-//     { project: "D", xp: 60 },
-//     { project: "E", xp: 100 },
-//   ];
-
-//   const svg = document.getElementById("chart");
   const width = svg.getAttribute("width");
   const height = svg.getAttribute("height");
 
   const padding = 50; // Space for labels
-  const barWidth = (width - 2 * padding) / data.length;
+  const barHeight = (height - 2 * padding) / data.length;
   const maxXP = Math.max(...data.map((d) => d.xp));
-  const scaleY = (height - 2 * padding) / maxXP;
+  const scaleX = (width - 2 * padding) / maxXP;
+
+  // Clear previous chart content
+  svg.innerHTML = "";
 
   // Draw axes
-  svg.innerHTML += `<line x1="${padding}" y1="${height - padding}" x2="${
-    width - padding
-  }" y2="${height - padding}" stroke="black"/>`; // X-axis
   svg.innerHTML += `<line x1="${padding}" y1="${padding}" x2="${padding}" y2="${
     height - padding
   }" stroke="black"/>`; // Y-axis
+  svg.innerHTML += `<line x1="${padding}" y1="${height - padding}" x2="${
+    width - padding
+  }" y2="${height - padding}" stroke="black"/>`; // X-axis
 
-  // Y-Axis Labels (XP values)
+  // X-Axis Labels (XP values)
   for (let i = 0; i <= maxXP; i += 20) {
-    let y = height - padding - i * scaleY;
-    svg.innerHTML += `<text x="${padding - 10}" y="${
-      y + 5
-    }" font-size="12" text-anchor="end">${i}</text>`;
-    svg.innerHTML += `<line x1="${
-      padding - 5
-    }" y1="${y}" x2="${padding}" y2="${y}" stroke="black"/>`;
+    let x = padding + i * scaleX;
+    svg.innerHTML += `<text x="${x}" y="${
+      height - padding + 15
+    }" font-size="12" text-anchor="middle">${i} kB</text>`;
+    svg.innerHTML += `<line x1="${x}" y1="${height - padding}" x2="${x}" y2="${
+      height - padding + 5
+    }" stroke="black"/>`;
   }
 
   // Draw bars
   data.forEach((d, i) => {
-    let x = padding + i * barWidth + 5;
-    let y = height - padding - d.xp * scaleY;
-    let barHeight = d.xp * scaleY;
+    let x = padding;
+    let y = padding + i * barHeight + 5;
+    let barWidth = d.xp * scaleX;
 
     // Bar
-    svg.innerHTML += `<rect x="${x}" y="${y}" width="${
-      barWidth - 10
-    }" height="${barHeight}" fill="steelblue"/>`;
+    svg.innerHTML += `<rect x="${x}" y="${y}" width="${barWidth}" height="${
+      barHeight - 20
+    }" fill="green"/>`;
 
-    // XP Label on top of bars
-    svg.innerHTML += `<text x="${x + (barWidth - 10) / 2}" y="${
-      y - 5
-    }" font-size="12" text-anchor="middle">${d.xp}</text>`;
+    // XP Label inside bars
+    svg.innerHTML += `<text x="${x + barWidth - 5}" y="${
+      y + (barHeight - 10) / 2 + 5
+    }" font-size="12" text-anchor="end" fill="white">${d.xp} kB</text>`;
 
-    // Project label
-    svg.innerHTML += `<text x="${x + (barWidth - 10) / 2}" y="${
-      height - 30
-    }" font-size="12" text-anchor="middle">${d.project}</text>`;
+    // Project label (category names on the left)
+    svg.innerHTML += `<text x="${padding + 5}" y="${
+      y - 2
+    }" font-size="12" text-anchor="start">${d.project}</text>`;
   });
-
-  // X-Axis Label
-  svg.innerHTML += `<text x="${width / 2}" y="${
-    height - 10
-  }" font-size="14" text-anchor="middle" font-weight="bold">Projects</text>`;
-
-  // Y-Axis Label (Rotated)
-  svg.innerHTML += `<text x="20" y="${
-    height / 2
-  }" font-size="14" text-anchor="middle" font-weight="bold" transform="rotate(-90, 20, ${
-    height / 2
-  })">XP</text>`;
 };

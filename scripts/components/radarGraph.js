@@ -1,8 +1,4 @@
 export const radarGraph = (skills, percentages, svg) => {
-  //   const skills = ["HTML", "CSS", "JS", "Rust", "Golang", "Python"];
-  //   const percentages = [100, 60, 50, 40, 30, 59]; // Skill levels in percentage
-
-  //   const svg = document.getElementById("radarChart");
   const centerX = 200,
     centerY = 200,
     radius = 100;
@@ -26,7 +22,7 @@ export const radarGraph = (skills, percentages, svg) => {
       let { x, y } = polarToCartesian(angle, (i / 5) * 100);
       points += `${x},${y} `;
     }
-    svg.innerHTML += `<polygon points="${points}" fill="none" stroke="lightgray"/>`;
+    svg.innerHTML += `<polygon points="${points}" fill="none" stroke="#ccc"/>`;
   }
 
   // Draw skill labels
