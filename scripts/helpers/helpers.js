@@ -1,3 +1,5 @@
+import { TOKEN_NAME } from "../constants/constans.js";
+
 // make skills unique and take top 5 skills
 export const makeSkillsUnique = (allSkills) => {
   const skills = {};
@@ -30,4 +32,12 @@ export const extractProjects = (data) => {
     project: object.name,
     xp: amount / 1000,
   }));
+};
+
+// Logout Functionality
+export const logoutFuncitonality = (logoutBtn) => {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem(TOKEN_NAME);
+    history.pushState(null, null, "/");
+  });
 };

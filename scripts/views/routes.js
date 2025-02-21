@@ -12,7 +12,10 @@ export const router = async () => {
   const appElement = document.querySelector(APP_ELEMENT_CLASS);
   appElement.innerHTML = "";
   if (jwt) {
-    appElement.append(await homeView());
+    const homeElemenet = await homeView();
+    if (homeElemenet) {
+      appElement.append(homeElemenet);
+    }
   } else {
     appElement.append(loginView());
   }

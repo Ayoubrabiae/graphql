@@ -4,14 +4,18 @@ import { basicInfo } from "../components/basicInfo.js";
 import { radarGraph } from "../components/radarGraph.js";
 import { TOKEN_NAME } from "../constants/constans.js";
 import { query } from "../constants/queries.js";
-import { extractProjects, makeSkillsUnique } from "../helpers/helpers.js";
+import {
+  extractProjects,
+  logoutFuncitonality,
+  makeSkillsUnique,
+} from "../helpers/helpers.js";
 
 export const homeView = async () => {
   const { data } = await fetchData(localStorage.getItem(TOKEN_NAME), query);
   if (data.errors) {
-    localStorage.removeItem("JWT");
+    localStorage.removeItem(TOKEN_NAME);
     history.pushState(null, null, "/");
-    return "";
+    return;
   }
 
   // make skills unique and take top 5 skills
@@ -31,7 +35,6 @@ export const homeView = async () => {
   const template = /*html*/ `
         <section class="home">
           <div class="logout-btn">
-            <!-- <img src="/images/logout.svg" alt="logout-icon" width="20"> -->
              Logout
           </div>
             <div class="container">
@@ -61,6 +64,8 @@ export const homeView = async () => {
   );
 
   barGraph(projects, element.getElementById("projectsChart"));
+
+  logoutFuncitonality(element.querySelector(".logout-btn"));
 
   return element;
 };

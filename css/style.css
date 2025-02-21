@@ -157,14 +157,9 @@ section.home::before {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px 30px;
+  overflow: auto;
 }
 
 .charts .chart .title {
   text-align: center;
 }
-
-.charts .chart svg {
-  max-width: 100%;
-}
-
-/* End Home Styling */
