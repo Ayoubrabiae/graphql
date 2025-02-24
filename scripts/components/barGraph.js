@@ -43,7 +43,9 @@ export const barGraph = (data, svg) => {
     // XP Label inside bars
     svg.innerHTML += `<text x="${x + barWidth - 5}" y="${
       y + (barHeight - 10) / 2 + 5
-    }" font-size="12" text-anchor="end" fill="white">${d.xp} kB</text>`;
+    }" font-size="12" text-anchor="end" fill="black">${d.xp.toFixed(
+      0
+    )} kB</text>`;
 
     // Project label (category names on the left)
     svg.innerHTML += `<text x="${padding + 5}" y="${

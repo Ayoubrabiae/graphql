@@ -1,1 +1,1 @@
-Link: https://ayoubrabiae.github.io/
+Link: https://ayoubrabiae.github.io/graphql/

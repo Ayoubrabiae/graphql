@@ -39,7 +39,7 @@ export const query = (id) => `
 
     xpPeerProjects: 
     user {
-      transactions(limit: 5, where: {type: {_eq: "xp"}, eventId: {_eq: ${id}}}, order_by: {createdAt: desc}) {
+      transactions(limit: 5, where: {type: {_eq: "xp"}, eventId: {_eq: ${id}}, object: {type: {_eq: "project"}}}, order_by: {createdAt: desc}) {
         object {
           name
         }
