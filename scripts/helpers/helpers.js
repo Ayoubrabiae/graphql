@@ -4,7 +4,7 @@ import { TOKEN_NAME } from "../constants/constans.js";
 export const makeSkillsUnique = (allSkills) => {
   const skills = {};
   allSkills.forEach(({ type, amount }) => {
-    if (!skills[type] && Object.keys(skills).length === 5) {
+    if (!skills[type] && Object.keys(skills).length === 9) {
       let minSkillKey;
       let minSkillValue = amount;
       for (const skill in skills) {

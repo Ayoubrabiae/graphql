@@ -1,4 +1,4 @@
-export const query = `
+export const query = (id) => `
 {
     user {
       id
@@ -29,7 +29,7 @@ export const query = `
   
     
     user {
-      transactions(limit: 5, where: {type: {_eq: "xp"}, eventId: {_eq: 41}}, order_by: {createdAt: desc}) {
+      transactions(limit: 5, where: {type: {_eq: "xp"}, eventId: {_eq: ${id}}}, order_by: {createdAt: desc}) {
         object {
           name
         }
@@ -39,11 +39,26 @@ export const query = `
 
     xpPeerProjects: 
     user {
-      transactions(limit: 5, where: {type: {_eq: "xp"}, eventId: {_eq: 41}}, order_by: {createdAt: desc}) {
+      transactions(limit: 5, where: {type: {_eq: "xp"}, eventId: {_eq: ${id}}}, order_by: {createdAt: desc}) {
         object {
           name
         }
         amount
+      }
+    }
+}
+`;
+
+export const getModuleIdQuery = `
+{
+    user {
+      events {
+        event {
+          object {
+            type
+          }
+        }
+        eventId
       }
     }
 }
